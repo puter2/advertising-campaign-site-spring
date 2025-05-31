@@ -16,19 +16,19 @@ public class HomeController {
         return "index.html";
     }
 
-    @GetMapping(
-            value="/add_campaign"
-    )
-    public String add(){
-        System.out.println('a');
-        return "add_campaign.html";
-    }
-
-    @PostMapping(
-            value="/add_campaign"
-    )
-    public String try_to_add(final HttpServletRequest request){
-        
-        return "done";
-    }
+//    @GetMapping(
+//            value="/add_campaign"
+//    )
+//    public String add(){
+//        System.out.println('a');
+//        return "add_campaign.html";
+//    }
+//
+//    @PostMapping(
+//            value="/add_campaign"
+//    )
+//    public String try_to_add(final HttpServletRequest request){
+//
+//        return "done";
+//    }
 }
