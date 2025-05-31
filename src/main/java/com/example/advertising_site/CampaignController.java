@@ -18,19 +18,25 @@ public class CampaignController {
     @GetMapping("/add_campaign")
     public String showForm(Model model){
         model.addAttribute("campaign", new Campaign());
-        return "add_campaign.html";
+        return "add_campaign";
     }
 
     @PostMapping("/add_campaign")
     public String createCampaign(@ModelAttribute Campaign campaign){
         System.out.println("post");
         campaignRepository.save(campaign);
-        return "succes";
+        return "redirect:/";
     }
 
     @GetMapping("/campaigns")
     @ResponseBody
     public List<Campaign> getCampaigns(){
         return campaignRepository.findAll();
+    }
+
+    @GetMapping("/campaigns/view")
+    public String showCampaigns(Model model){
+        model.addAttribute("campaigns", campaignRepository.findAll());
+        return "campaign_list.html";
     }
 }

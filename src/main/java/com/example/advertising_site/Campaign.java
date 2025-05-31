@@ -43,6 +43,10 @@ public class Campaign implements Serializable {
         this.radius = radius;
     }
 
+    public String getId() {
+        return String.valueOf(this.id);
+    }
+
     public String getName() {
         return this.name;
     }
