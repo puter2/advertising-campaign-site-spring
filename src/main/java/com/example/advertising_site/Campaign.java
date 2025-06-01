@@ -74,4 +74,36 @@ public class Campaign implements Serializable {
     public int getRadius() {
         return this.radius;
     }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setFund(int fund) {
+        this.fund = fund;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

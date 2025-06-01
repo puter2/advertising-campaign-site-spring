@@ -18,6 +18,7 @@
         <th>Town</th>
         <th>Radius</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
         <td th:text="${campaign.town}"></td>
         <td th:text="${campaign.radius}"></td>
         <td><a th:href="@{/campaigns/view/{id}(id=${campaign.id})}">edit</a></td>
+        <td><a th:href="@{/campaigns/delete/{id}(id=${campaign.id})}">delete</a></td>
     </tr>
     </tbody>
 </table>

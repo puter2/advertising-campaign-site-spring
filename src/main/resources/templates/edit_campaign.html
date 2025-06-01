@@ -5,7 +5,8 @@
   <title>Add campaign</title>
 </head>
 <body>
-<h3>current balance</h3>
+<h3>Current Balance:</h3>
+<h3 th:text="${balance}"></h3>
 <br>
 <form action="" method="post">
   Campaign name:<input type="text" name="name" th:value="${campaign.name}"/>
@@ -18,14 +19,20 @@
   <br>
   Status:
   <select name="status">
-    <option selected="selected" value="on">on</option>
-    <option value="off">off</option>
+    <option th:each="status : ${statuses}"
+            th:value="${status}"
+            th:text="${status}"
+            th:selected="${status == campaign.status}">
+    </option>
   </select>
   <br>
   Town:
   <select name="town">
-    <option selected="selected" value="krk">krakow</option>
-    <option value="wawa">warszawa</option>
+    <option th:each="town : ${towns}"
+            th:value="${town}"
+            th:text="${town}"
+            th:selected="${town == campaign.town}">
+    </option>
   </select>
   <br>
   Radius:<input type="number" name="radius" th:value="${campaign.radius}"/>km

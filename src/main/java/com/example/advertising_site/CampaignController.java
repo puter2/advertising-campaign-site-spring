@@ -13,6 +13,7 @@ import java.util.List;
 //@RequestMapping("/campaigns")
 public class CampaignController {
 
+    static int balance = 1_000_000;
     static String[] towns = {"Cracow", "Warsaw"};
     static String[] statuses = {"on", "off"};
 
@@ -21,6 +22,7 @@ public class CampaignController {
 
     @GetMapping("/add_campaign")
     public String showForm(Model model){
+        model.addAttribute("balance",balance);
         model.addAttribute("campaign", new Campaign());
         model.addAttribute("towns",towns);
         model.addAttribute("statuses", statuses);
@@ -32,8 +34,15 @@ public class CampaignController {
     @PostMapping("/add_campaign")
     public String createCampaign(@ModelAttribute Campaign campaign){
         System.out.println("post");
-        campaignRepository.save(campaign);
-        return "redirect:/";
+        if(balance>=campaign.getFund()) {
+            balance-=campaign.getFund();
+            campaignRepository.save(campaign);
+            return "redirect:/";
+        }
+        else{
+            System.out.println("not enough funds");
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/campaigns")
@@ -49,14 +58,24 @@ public class CampaignController {
     }
 
     @GetMapping("/campaigns/view/{id}")
-    public String editCampaign(Model model, @PathVariable Long id){
-        System.out.println(id);
-        ArrayList<Long> a = new ArrayList<>();
-        a.add(id);
-        campaignRepository.getReferenceById(id);
-//        model.addAttribute("campaign", campaignRepository.findAllById(a).getFirst());
+    public String showEditCampaignForm(Model model, @PathVariable Long id){
+        model.addAttribute("balance",balance);
         model.addAttribute("campaign", campaignRepository.getReferenceById(id));
-        System.out.println(campaignRepository.findAllById(a));
         return "edit_campaign.html";
+    }
+    @PostMapping("/campaigns/view/{id}")
+    public String editCampaign(Model model, @PathVariable Long id, Campaign campaign){
+        var old_campaign = campaignRepository.findById(id).get();
+        balance = balance + old_campaign.getFund() - campaign.getFund();
+        old_campaign.setFund(campaign.getFund());
+        return "redirect:/";
+    }
+
+    @GetMapping("/campaigns/delete/{id}")
+    public String deleteCampaign(Model model, @PathVariable Long id){
+        var campaign = campaignRepository.findById(id).get();
+        balance += campaign.getFund();
+        campaignRepository.deleteById(id);
+        return "redirect:/campaigns/view";
     }
 }
