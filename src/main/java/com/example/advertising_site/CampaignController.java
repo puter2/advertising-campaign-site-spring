@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/campaigns")
 public class CampaignController {
 
     static int balance = 1_000_000;
@@ -32,15 +31,17 @@ public class CampaignController {
     }
 
     @PostMapping("/add_campaign")
-    public String createCampaign(@ModelAttribute Campaign campaign){
-        System.out.println("post");
+    public String createCampaign(@ModelAttribute Campaign campaign, Model model){
+        //System.out.println("post");
         if(balance>=campaign.getFund()) {
             balance-=campaign.getFund();
             campaignRepository.save(campaign);
+            model.addAttribute("message", "Campaign added");
             return "redirect:/";
         }
         else{
             System.out.println("not enough funds");
+            model.addAttribute("message","not enough funds");
             return "redirect:/";
         }
     }
@@ -59,6 +60,10 @@ public class CampaignController {
 
     @GetMapping("/campaigns/view/{id}")
     public String showEditCampaignForm(Model model, @PathVariable Long id){
+        model.addAttribute("towns",towns);
+        model.addAttribute("statuses", statuses);
+        model.addAttribute("selectedTown", towns[0]);
+        model.addAttribute("selectedStatus", statuses[0]);
         model.addAttribute("balance",balance);
         model.addAttribute("campaign", campaignRepository.getReferenceById(id));
         return "edit_campaign.html";
@@ -66,8 +71,17 @@ public class CampaignController {
     @PostMapping("/campaigns/view/{id}")
     public String editCampaign(Model model, @PathVariable Long id, Campaign campaign){
         var old_campaign = campaignRepository.findById(id).get();
-        balance = balance + old_campaign.getFund() - campaign.getFund();
-        old_campaign.setFund(campaign.getFund());
+        int difference = old_campaign.getFund() - campaign.getFund();
+        String message;
+        if(balance>=Math.abs(difference)){
+            balance += difference;
+            message = "Campaign changed";
+            old_campaign.setFund(campaign.getFund());
+        }
+        else{
+            message = "Not enough funds";
+        }
+        model.addAttribute("message",message);
         return "redirect:/";
     }
 

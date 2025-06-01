@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,7 +12,8 @@
     <li>
         <a href="/campaigns/view">show all campaigns</a>
     </li>
-
 </ul>
+
+<p th:text="${message}"></p>
 </body>
 </html>
