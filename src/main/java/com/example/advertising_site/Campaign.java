@@ -25,7 +25,7 @@ public class Campaign implements Serializable {
     @Column(nullable = false)
     private int fund;
     @Column(nullable = false)
-    private boolean status;
+    private String status;
     @Column(nullable = false)
     private String town;
     @Column(nullable = false)
@@ -33,7 +33,7 @@ public class Campaign implements Serializable {
 
     protected Campaign(){}
 
-    public Campaign(String name, String keywords, int bid, int fund, boolean status, String town, int radius) {
+    public Campaign(String name, String keywords, int bid, int fund, String status, String town, int radius) {
         this.name = name;
         this.keywords = keywords;
         this.bid = bid;
@@ -63,7 +63,7 @@ public class Campaign implements Serializable {
         return this.fund;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return this.status;
     }
 

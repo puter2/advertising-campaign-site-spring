@@ -17,7 +17,7 @@
         <th>Status</th>
         <th>Town</th>
         <th>Radius</th>
-
+        <th>Edit</th>
     </tr>
     </thead>
     <tbody>
@@ -30,6 +30,7 @@
         <td th:text="${campaign.status}"></td>
         <td th:text="${campaign.town}"></td>
         <td th:text="${campaign.radius}"></td>
+        <td><a th:href="@{/campaigns/view/{id}(id=${campaign.id})}">edit</a></td>
     </tr>
     </tbody>
 </table>

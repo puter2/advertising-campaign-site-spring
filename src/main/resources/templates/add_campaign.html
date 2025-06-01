@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add campaign</title>
@@ -18,14 +18,20 @@
   <br>
   Status:
   <select name="status">
-    <option selected="selected" value="on">on</option>
-    <option value="off">off</option>
+    <option th:each="status : ${statuses}"
+            th:value="${status}"
+            th:text="${status}"
+            th:selected="${status == selectedStatus}">
+    </option>
   </select>
   <br>
   Town:
   <select name="town">
-    <option selected="selected" value="krk">krakow</option>
-    <option value="wawa">warszawa</option>
+    <option th:each="town : ${towns}"
+            th:value="${town}"
+            th:text="${town}"
+            th:selected="${town == selectedTown}">
+    </option>
   </select>
   <br>
   Radius:<input type="number" name="radius"/>km

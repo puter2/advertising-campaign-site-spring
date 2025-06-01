@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add campaign</title>
+</head>
+<body>
+<h3>current balance</h3>
+<br>
+<form action="" method="post">
+  Campaign name:<input type="text" name="name" th:value="${campaign.name}"/>
+  <br>
+  Keywords:<input type="text" name="keywords" th:value="${campaign.keywords}"/>
+  <br>
+  Bid amount:<input type="number" name="bid" min="100" th:value="${campaign.bid}"/>
+  <br>
+  Campaign fund:<input type="number" name="fund" th:value="${campaign.fund}"/>
+  <br>
+  Status:
+  <select name="status">
+    <option selected="selected" value="on">on</option>
+    <option value="off">off</option>
+  </select>
+  <br>
+  Town:
+  <select name="town">
+    <option selected="selected" value="krk">krakow</option>
+    <option value="wawa">warszawa</option>
+  </select>
+  <br>
+  Radius:<input type="number" name="radius" th:value="${campaign.radius}"/>km
+  <br>
+  <input type="submit" value="update campaign info"/>
+</form>
+</body>
+</html>
