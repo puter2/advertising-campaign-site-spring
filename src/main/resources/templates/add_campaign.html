@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/style.css}">
 <head>
     <meta charset="UTF-8">
     <title>Add campaign</title>
@@ -11,7 +12,7 @@
 <h3 th:text="${balance}"></h3>
 <br>
 <form action="" method="post">
-  Campaign name:<input type="text" name="name"/>
+  Campaign name: <input type="text" name="name"/>
   <br>
   Keywords:
   <br>
@@ -21,9 +22,9 @@
             th:text="${keyword}"></option>
   </select>
   <br>
-  Bid amount:<input type="number" name="bid" min="100"/>
+  Bid amount: <input type="number" name="bid" min="100"/>
   <br>
-  Campaign fund:<input type="number" name="fund"/>
+  Campaign fund: <input type="number" name="fund"/>
   <br>
   Status:
   <select name="status">
@@ -43,7 +44,7 @@
     </option>
   </select>
   <br>
-  Radius:<input type="number" name="radius"/>km
+  Radius: <input type="number" name="radius"/>km
   <br>
   <input type="submit" value="create campaign"/>
 </form>
