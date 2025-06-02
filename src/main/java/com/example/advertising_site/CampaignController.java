@@ -15,6 +15,7 @@ public class CampaignController {
     static int balance = 1_000_000;
     static String[] towns = {"Cracow", "Warsaw"};
     static String[] statuses = {"on", "off"};
+    static String[] keywords = {"amazing", "sport", "cooking", "web"};
 
     @Autowired
     private CampaignRepository campaignRepository;
@@ -27,6 +28,7 @@ public class CampaignController {
         model.addAttribute("statuses", statuses);
         model.addAttribute("selectedTown", towns[0]);
         model.addAttribute("selectedStatus", statuses[0]);
+        model.addAttribute("keywords", keywords);
         return "add_campaign";
     }
 
@@ -66,6 +68,7 @@ public class CampaignController {
         model.addAttribute("selectedStatus", statuses[0]);
         model.addAttribute("balance",balance);
         model.addAttribute("campaign", campaignRepository.getReferenceById(id));
+        model.addAttribute("keywords", keywords);
         return "edit_campaign.html";
     }
     @PostMapping("/campaigns/view/{id}")

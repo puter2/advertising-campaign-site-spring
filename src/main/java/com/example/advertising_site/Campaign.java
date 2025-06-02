@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Campaign implements Serializable {
@@ -19,7 +20,7 @@ public class Campaign implements Serializable {
     private String name;
 
     @Column(nullable = false)
-    private String keywords;
+    private List<String> keywords;
     @Column(nullable = false)
     private int bid;
     @Column(nullable = false)
@@ -33,7 +34,7 @@ public class Campaign implements Serializable {
 
     protected Campaign(){}
 
-    public Campaign(String name, String keywords, int bid, int fund, String status, String town, int radius) {
+    public Campaign(String name, List<String> keywords, int bid, int fund, String status, String town, int radius) {
         this.name = name;
         this.keywords = keywords;
         this.bid = bid;
@@ -51,8 +52,8 @@ public class Campaign implements Serializable {
         return this.name;
     }
 
-    public String getKeywords() {
-        return this.keywords;
+    public List<String> getKeywords() {
+        return keywords;
     }
 
     public int getBid() {
@@ -99,7 +100,7 @@ public class Campaign implements Serializable {
         this.id = id;
     }
 
-    public void setKeywords(String keywords) {
+    public void setKeywords(List<String> keywords) {
         this.keywords = keywords;
     }
 
